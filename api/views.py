@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .models import Point
 from .serializers import PointSerializer
 import math
+import markdown
+import os
 
 
 def find_closest_points(points_str):
@@ -58,3 +60,10 @@ class ClosePoints(APIView):
         eucld_point = Point.objects.all().filter(id=request.data["id"]).values()
         return Response({"Message":"New points& euclidean distance added", "Points":eucld_point })
     
+
+def readme_view(request):
+    readme_path = os.path.join(os.path.dirname(__file__), '../README.md')
+    with open(readme_path, 'r') as readme_file:
+        readme_content = readme_file.read()
+    html_content = markdown.markdown(readme_content, extensions=['markdown.extensions.fenced_code'])
+    return render(request, 'readme.html', {'content': html_content})

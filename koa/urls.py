@@ -18,6 +18,8 @@ from django.urls import path, re_path
 from api import views
 
 urlpatterns = [
+    path('', views.readme_view, name='readme'),
     re_path('api/', views.ClosePoints.as_view(), name="api"),
     path('admin/', admin.site.urls),
+    
 ]
