@@ -18,6 +18,6 @@ from django.urls import path, re_path
 from api import views
 
 urlpatterns = [
-    re_path('api/', views.ClosePoints.as_view()),
+    re_path('api/', views.ClosePoints.as_view(), name="api"),
     path('admin/', admin.site.urls),
 ]
